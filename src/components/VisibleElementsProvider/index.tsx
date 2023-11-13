@@ -1,18 +1,14 @@
 import { ReactNode, RefObject, useCallback, useEffect, useState } from 'react';
 
 import { VisibleElementsContext } from '../../contexts';
-import { visibilityCallbacksType } from '../../types/visibilityCallbacksType';
+import { useVisibilityCallbacks } from '../../hooks';
 
 type Props = {
   children: ReactNode[] | ReactNode;
   elements: RefObject<HTMLElement>[];
   options: IntersectionObserverInit;
   updateCondition: (entry: IntersectionObserverEntry) => boolean;
-  onEntryVisible?: visibilityCallbacksType;
-  onEntryInvisible?: visibilityCallbacksType;
 };
-
-// TODO: Use onEntryInvisible, onEntryInvisible callbacks
 
 /**
  * Provider to get access to currently visible elements.
@@ -27,18 +23,23 @@ type Props = {
 
 function VisibleElementsProvider({ children, elements, options, updateCondition }: Props): ReactNode {
   const [visibleElements, setVisibleElements] = useState<string[]>([]);
+  const { getHandlers } = useVisibilityCallbacks();
 
   const handleIntersect = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       entries.forEach((entry) => {
+        const { onVisible, onInvisible } = getHandlers(entry.target.id) ?? {};
+
         if (updateCondition(entry)) {
+          onVisible?.(entry);
           setVisibleElements((prev) => [...prev, entry.target.id]);
         } else {
+          onInvisible?.(entry);
           setVisibleElements((prev) => prev.filter((el) => el !== entry.target.id));
         }
       });
     },
-    [updateCondition],
+    [updateCondition, getHandlers],
   );
 
   useEffect(() => {

@@ -1,7 +1,7 @@
 import { ReactNode, RefObject, useCallback, useReducer } from 'react';
 import VisibleElementsProvider from '../VisibleElementsProvider';
 import RegisterProvider from '../RegisterProvider';
-import { visibilityCallbacksType } from '../../types/visibilityCallbacksType';
+import VisibilityCallbacksProvider from '../VisibilityCallbacksProvider';
 
 type Action =
   | { type: 'register'; payload: RefObject<HTMLElement> }
@@ -50,8 +50,6 @@ type Props = {
   children: ReactNode[] | ReactNode;
   options?: IntersectionObserverInit;
   updateCondition?: (entry: IntersectionObserverEntry) => boolean;
-  onEntryVisible?: visibilityCallbacksType;
-  onEntryInvisible?: visibilityCallbacksType;
 };
 
 /**
@@ -63,13 +61,7 @@ type Props = {
  * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInvisible] - An optional callback, will be invoked when updateCondition became false..
  * @returns {ReactNode}.
  */
-function ObserverProvider({
-  children,
-  options,
-  updateCondition = updateOn,
-  onEntryInvisible,
-  onEntryVisible,
-}: Props): ReactNode {
+function ObserverProvider({ children, options, updateCondition = updateOn }: Props): ReactNode {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const registerElement = useCallback((ref: RefObject<HTMLElement>) => {
@@ -87,17 +79,17 @@ function ObserverProvider({
   }, []);
 
   return (
-    <VisibleElementsProvider
-      updateCondition={updateCondition}
-      onEntryInvisible={onEntryInvisible}
-      onEntryVisible={onEntryVisible}
-      elements={state.elements}
-      options={{ ...observerOptions, ...options }}
-    >
-      <RegisterProvider registerElement={registerElement} unregisterElement={unregisterElement}>
-        {children}
-      </RegisterProvider>
-    </VisibleElementsProvider>
+    <VisibilityCallbacksProvider>
+      <VisibleElementsProvider
+        updateCondition={updateCondition}
+        elements={state.elements}
+        options={{ ...observerOptions, ...options }}
+      >
+        <RegisterProvider registerElement={registerElement} unregisterElement={unregisterElement}>
+          {children}
+        </RegisterProvider>
+      </VisibleElementsProvider>
+    </VisibilityCallbacksProvider>
   );
 }
 

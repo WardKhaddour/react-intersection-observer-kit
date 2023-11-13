@@ -1,5 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 import { RegisterContext } from '../contexts';
+import { useVisibilityCallbacks } from './';
+import { visibilityCallbacksType } from '../types/visibilityCallbacksType';
 
 /**
  * React Hook for registering and un-registering a DOM element with the ObserverProvider.
@@ -7,15 +9,20 @@ import { RegisterContext } from '../contexts';
  * @param {string} [id] - Optional ID to assign to the registered element, Must be specified if the element do not have an ID in order to work properly.
  * @returns {React.RefObject<T>} A ref object representing the registered HTML element.
  */
-function useRegister<T extends HTMLElement>(id?: string): React.RefObject<T> {
+function useRegister<T extends HTMLElement>(
+  id?: string,
+  options?: { onEntryVisible?: visibilityCallbacksType; onEntryInvisible?: visibilityCallbacksType },
+): React.RefObject<T> {
   const ref = useRef<T>(null);
   const registerContext = useContext(RegisterContext);
+  const { onEntryVisible, onEntryInvisible } = options ?? {};
 
   if (!registerContext) {
     throw new Error('ObserverProvider needs to be parent for components which uses useRegister');
   }
 
   const { register, unregister } = registerContext;
+  const { addHandlers, removeHandlers } = useVisibilityCallbacks();
 
   useEffect(() => {
     if (id && ref.current) {
@@ -32,6 +39,20 @@ function useRegister<T extends HTMLElement>(id?: string): React.RefObject<T> {
       unregister(ref);
     };
   }, [id, register, unregister]);
+
+  useEffect(() => {
+    const currentId = id || ref.current?.id;
+
+    if (currentId)
+      addHandlers(currentId, {
+        onVisible: onEntryVisible,
+        onInvisible: onEntryInvisible,
+      });
+
+    return () => {
+      if (currentId) removeHandlers(currentId);
+    };
+  }, [id, addHandlers, removeHandlers, onEntryVisible, onEntryInvisible]);
 
   return ref;
 }
