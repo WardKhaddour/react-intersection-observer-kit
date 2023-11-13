@@ -1,0 +1,52 @@
+{
+  "name": "react-intersection-observer-kit",
+  "description": "React library for using Intersection Observer API in React-friendly way",
+  "author": "Ward Khaddour",
+  "version": "0.0.1",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/esm/index.d.ts",
+  "scripts": {
+    "build": "npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run prettier && npm run lint",
+    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
+    "prettier": "prettier --write \"{src,example/src}/**/*.{js,ts,jsx,tsx}\""
+  },
+  "license": "MIT",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "keywords": [
+    "react",
+    "typescript",
+    "intersection observer",
+    "custom hooks",
+    "react component",
+    "viewport"
+  ],
+  "peerDependencies": {
+    "react": "18.2.0",
+    "react-dom": "^18.2.0",
+    "tslib": "^2.6.2"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.37",
+    "@typescript-eslint/eslint-plugin": "^6.11.0",
+    "@typescript-eslint/parser": "^6.11.0",
+    "eslint": "^8.53.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tslib": "^2.6.2",
+    "typescript": "^5.2.2"
+  }
+}

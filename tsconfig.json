@@ -1,0 +1,23 @@
+{
+  "include": ["src"],
+  "exclude": ["dist", "node_modules"],
+  "compilerOptions": {
+    "target": "es5",
+    "importHelpers": true,
+    "declaration": true,
+    "rootDir": "./src",
+    "outDir": "./dist/esm",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "lib": ["ESNext", "DOM"],
+    "module": "ESNext",
+    "allowSyntheticDefaultImports": true
+  }
+}
