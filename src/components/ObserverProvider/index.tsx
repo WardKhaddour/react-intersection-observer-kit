@@ -57,7 +57,7 @@ type Props = {
 /**
  * Wrapper for using Intersection Observer in React, providing access to useRegister and useVisibleElements hooks.
  * @param {ReactNode[] | ReactNode} [props.children] - Components which needs access to the useRegister and useVisibleElements Hooks.
- * @param {ObserverProviderOptions} [props.options] - Options for overriding the default options for Intersection Observer.
+ * @param {IntersectionObserverInit} [props.options] - Options for overriding the default options for Intersection Observer.
  * @param {(entry: IntersectionObserverEntry) => boolean} [props.updateCondition] - Callback to determine whether to update the visible elements array or not.
  * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryVisible] - An optional callback, will be invoked when updateCondition became true..
  * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInvisible] - An optional callback, will be invoked when updateCondition became false..
