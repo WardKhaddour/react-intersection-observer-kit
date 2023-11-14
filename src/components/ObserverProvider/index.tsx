@@ -1,7 +1,7 @@
 import { ReactNode, RefObject, useCallback, useReducer } from 'react';
-import VisibleElementsProvider from '../VisibleElementsProvider';
+import ActiveElementsProvider from '../ActiveElementsProvider';
 import RegisterProvider from '../RegisterProvider';
-import VisibilityCallbacksProvider from '../VisibilityCallbacksProvider';
+import ActivityListenersProvider from '../ActivityListenersProvider';
 
 type Action =
   | { type: 'register'; payload: RefObject<HTMLElement> }
@@ -40,28 +40,28 @@ const observerOptions = {
 };
 
 /**
- * Default condition for updating visible elements, updates elements when the entry is intersecting
+ * Default condition for updating active elements, updates elements when the entry is intersecting
  * @param {IntersectionObserverEntry} [entry] Intersection observer entry
  * @returns {boolean} if the condition is set or not
  */
-const updateOn = (entry: IntersectionObserverEntry): boolean => entry.isIntersecting;
+const defaultActiveCondition = (entry: IntersectionObserverEntry): boolean => entry.isIntersecting;
 
 type Props = {
   children: ReactNode[] | ReactNode;
   options?: IntersectionObserverInit;
-  updateCondition?: (entry: IntersectionObserverEntry) => boolean;
+  activeCondition?: (entry: IntersectionObserverEntry) => boolean;
 };
 
 /**
- * Wrapper for using Intersection Observer in React, providing access to useRegister and useVisibleElements hooks.
- * @param {ReactNode[] | ReactNode} [props.children] - Components which needs access to the useRegister and useVisibleElements Hooks.
+ * Wrapper for using Intersection Observer in React, providing access to useRegister and useActiveElements hooks.
+ * @param {ReactNode[] | ReactNode} [props.children] - Components which needs access to the useRegister and useActiveElements Hooks.
  * @param {IntersectionObserverInit} [props.options] - Options for overriding the default options for Intersection Observer.
- * @param {(entry: IntersectionObserverEntry) => boolean} [props.updateCondition] - Callback to determine whether to update the visible elements array or not.
- * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryVisible] - An optional callback, will be invoked when updateCondition became true..
- * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInvisible] - An optional callback, will be invoked when updateCondition became false..
+ * @param {(entry: IntersectionObserverEntry) => boolean} [props.activeCondition] - Callback to determine whether to update the active elements array or not.
+ * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryActive] - An optional callback, will be invoked when activeCondition became true..
+ * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInactive] - An optional callback, will be invoked when activeCondition became false..
  * @returns {ReactNode}.
  */
-function ObserverProvider({ children, options, updateCondition = updateOn }: Props): ReactNode {
+function ObserverProvider({ children, options, activeCondition = defaultActiveCondition }: Props): ReactNode {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const registerElement = useCallback((ref: RefObject<HTMLElement>) => {
@@ -79,17 +79,17 @@ function ObserverProvider({ children, options, updateCondition = updateOn }: Pro
   }, []);
 
   return (
-    <VisibilityCallbacksProvider>
-      <VisibleElementsProvider
-        updateCondition={updateCondition}
+    <ActivityListenersProvider>
+      <ActiveElementsProvider
+        activeCondition={activeCondition}
         elements={state.elements}
         options={{ ...observerOptions, ...options }}
       >
         <RegisterProvider registerElement={registerElement} unregisterElement={unregisterElement}>
           {children}
         </RegisterProvider>
-      </VisibleElementsProvider>
-    </VisibilityCallbacksProvider>
+      </ActiveElementsProvider>
+    </ActivityListenersProvider>
   );
 }
 

@@ -1,4 +1,4 @@
 export { default as useRegister } from './useRegister';
-export { default as useVisibleElements } from './useVisibleElements';
+export { default as useActiveElements } from './useActiveElements';
 export { default as useInViewport } from './useInViewport';
-export { default as useVisibilityCallbacks } from './useVisibilityCallbacks';
+export { default as useActivityListeners } from './useActivityListeners';

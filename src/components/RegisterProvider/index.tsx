@@ -8,7 +8,7 @@ type Props = {
 };
 
 /**
- * Provider to get access to register and unregister functions, to add and remove entries from Visible Elements Provider.
+ * Provider to get access to register and unregister functions, to add and remove entries from Active Elements Provider.
  * @param {ReactNode | ReactNode []} [props.children]  Components which needs access to the useRegister Hook.
  * @param {(ref: RefObject<HTMLElement>) => void} [props.registerElement] function to handle registering new element.
  * @param {(ref: RefObject<HTMLElement>) => void} [props.unregisterElement] function to handle un-registering element.

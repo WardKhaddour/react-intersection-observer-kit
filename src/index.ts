@@ -10,6 +10,6 @@
  */
 
 export { useRegister } from './hooks';
-export { useVisibleElements } from './hooks';
+export { useActiveElements } from './hooks';
 export { useInViewport } from './hooks';
 export { ObserverProvider } from './components';

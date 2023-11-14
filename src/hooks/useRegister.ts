@@ -1,28 +1,28 @@
 import { useContext, useEffect, useRef } from 'react';
 import { RegisterContext } from '../contexts';
-import { useVisibilityCallbacks } from './';
-import { visibilityCallbacksType } from '../types/visibilityCallbacksType';
+import { useActivityListeners } from './';
+import { activityListenerType } from '../types/activityListenerType';
 
 /**
- * React Hook for registering and un-registering a DOM element with the ObserverProvider.
+ * React Hook for registering and un-registering a DOM element to track it with ObserverProvider.
  * @template T - The type of the HTML element to be registered.
  * @param {string} [id] - Optional ID to assign to the registered element, Must be specified if the element do not have an ID in order to work properly.
  * @returns {React.RefObject<T>} A ref object representing the registered HTML element.
  */
 function useRegister<T extends HTMLElement>(
   id?: string,
-  options?: { onEntryVisible?: visibilityCallbacksType; onEntryInvisible?: visibilityCallbacksType },
+  options?: { onEntryActive?: activityListenerType; onEntryInactive?: activityListenerType },
 ): React.RefObject<T> {
   const ref = useRef<T>(null);
   const registerContext = useContext(RegisterContext);
-  const { onEntryVisible, onEntryInvisible } = options ?? {};
+  const { onEntryActive, onEntryInactive } = options ?? {};
 
   if (!registerContext) {
     throw new Error('ObserverProvider needs to be parent for components which uses useRegister');
   }
 
   const { register, unregister } = registerContext;
-  const { addHandlers, removeHandlers } = useVisibilityCallbacks();
+  const { addHandlers, removeHandlers } = useActivityListeners();
 
   useEffect(() => {
     if (id && ref.current) {
@@ -45,14 +45,14 @@ function useRegister<T extends HTMLElement>(
 
     if (currentId)
       addHandlers(currentId, {
-        onVisible: onEntryVisible,
-        onInvisible: onEntryInvisible,
+        onActive: onEntryActive,
+        onInactive: onEntryInactive,
       });
 
     return () => {
       if (currentId) removeHandlers(currentId);
     };
-  }, [id, addHandlers, removeHandlers, onEntryVisible, onEntryInvisible]);
+  }, [id, addHandlers, removeHandlers, onEntryActive, onEntryInactive]);
 
   return ref;
 }

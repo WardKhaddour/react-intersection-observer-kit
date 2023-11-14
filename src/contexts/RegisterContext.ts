@@ -1,12 +1,12 @@
 import { RefObject, createContext } from 'react';
-import { visibilityCallbacksType } from '../types/visibilityCallbacksType';
+import { activityListenerType } from '../types/activityListenerType';
 
 type RegisterContextValue = {
   register: (
     element: RefObject<HTMLElement>,
     callbacks?: {
-      onVisible?: visibilityCallbacksType;
-      onInvisible?: visibilityCallbacksType;
+      onActive?: activityListenerType;
+      onInactive?: activityListenerType;
     },
   ) => void;
   unregister: (element: RefObject<HTMLElement>) => void;

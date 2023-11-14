@@ -1,20 +1,20 @@
 import { useReducer, ReactNode, useCallback } from 'react';
-import { VisibilityCallbacksContext } from '../../contexts';
-import { visibilityCallbacksType } from '../../types/visibilityCallbacksType';
+import { ActivityListenersContext } from '../../contexts';
+import { activityListenerType } from '../../types/activityListenerType';
 
-type StateType = Map<string, { onVisible?: visibilityCallbacksType; onInvisible?: visibilityCallbacksType }>;
+type StateType = Map<string, { onActive?: activityListenerType; onInactive?: activityListenerType }>;
 
 type ActionType = {
   type: 'add' | 'remove';
   payload: {
     id: string;
-    handlers?: { onVisible?: visibilityCallbacksType; onInvisible?: visibilityCallbacksType };
+    handlers?: { onActive?: activityListenerType; onInactive?: activityListenerType };
   };
 };
 
 const initialState: StateType = new Map<
   string,
-  { onVisible?: visibilityCallbacksType; onInvisible?: visibilityCallbacksType }
+  { onActive?: activityListenerType; onInactive?: activityListenerType }
 >();
 
 const handlersReducer = (state: StateType, action: ActionType) => {
@@ -31,15 +31,15 @@ const handlersReducer = (state: StateType, action: ActionType) => {
 };
 
 /**
- * Provider to get access to change handlers related to visibility of some entry.
+ * Provider to get access to changes in active state of some entry.
  * @param {ReactNode | ReactNode []} [props.children]  Components which needs access to the useHandlers Hook.
- * @returns [ReactNode] Visibility Callbacks Provider
+ * @returns [ReactNode] Activity Listeners Provider
  */
-function VisibilityCallbacksProvider({ children }: { children: ReactNode | ReactNode[] }) {
+function ActivityListenersProvider({ children }: { children: ReactNode | ReactNode[] }) {
   const [state, dispatch] = useReducer(handlersReducer, initialState);
 
   const handleAddHandlers = useCallback(
-    (id: string, handlers: { onVisible?: visibilityCallbacksType; onInvisible?: visibilityCallbacksType }) => {
+    (id: string, handlers: { onActive?: activityListenerType; onInactive?: activityListenerType }) => {
       dispatch({
         type: 'add',
         payload: {
@@ -68,7 +68,7 @@ function VisibilityCallbacksProvider({ children }: { children: ReactNode | React
   );
 
   return (
-    <VisibilityCallbacksContext.Provider
+    <ActivityListenersContext.Provider
       value={{
         getHandlers: handleGetHandlers,
         addHandlers: handleAddHandlers,
@@ -76,8 +76,8 @@ function VisibilityCallbacksProvider({ children }: { children: ReactNode | React
       }}
     >
       {children}
-    </VisibilityCallbacksContext.Provider>
+    </ActivityListenersContext.Provider>
   );
 }
 
-export default VisibilityCallbacksProvider;
+export default ActivityListenersProvider;
