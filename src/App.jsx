@@ -1,23 +1,16 @@
-import {
-  Route,
-  BrowserRouter,
-  Routes,
-  createBrowserRouter,
-  createRoutesFromElements,
-  RouterProvider,
-} from 'react-router-dom';
+import { createHashRouter, RouterProvider } from 'react-router-dom';
 import LazyFetchingData from './LazyFetchingData';
 import LazyLoadComponent from './LazyLoadingComponent';
 import AnimateElements from './AnimateElements';
 
-const router = createBrowserRouter([
-  { path: '/react-intersection-observer-kit/', element: <AnimateElements /> },
+const router = createHashRouter([
+  { path: '/', element: <AnimateElements /> },
   {
-    path: '/react-intersection-observer-kit/lazy-fetch',
+    path: '/lazy-fetch',
     element: <LazyFetchingData />,
   },
   {
-    path: '/react-intersection-observer-kit/lazy-load',
+    path: '/lazy-load',
     element: <LazyLoadComponent />,
   },
 ]);
@@ -25,7 +18,6 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      Hello
       <RouterProvider router={router} />
     </>
   );
