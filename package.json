@@ -1,52 +1,33 @@
 {
-  "name": "react-intersection-observer-kit",
-  "description": "React library for using Intersection Observer API in React-friendly way",
-  "author": "Ward Khaddour",
-  "version": "0.0.5",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/esm/index.d.ts",
+  "name": "react-intersection-observer-kit-examples",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "build": "npm run build:esm && npm run build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
-    "prepare": "npm run build",
-    "prepublishOnly": "npm run prettier && npm run lint",
-    "lint": "eslint \"{**/*,*}.{js,ts,jsx,tsx}\"",
-    "prettier": "prettier --write \"{src,example/src}/**/*.{js,ts,jsx,tsx}\""
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
-  "license": "MIT",
-  "files": [
-    "dist",
-    "LICENSE",
-    "README.md"
-  ],
-  "keywords": [
-    "react",
-    "typescript",
-    "intersection observer",
-    "custom hooks",
-    "react component",
-    "viewport"
-  ],
-  "peerDependencies": {
-    "react": "18.2.0",
-    "react-dom": "^18.2.0",
-    "tslib": "^2.6.2"
-  },
-  "devDependencies": {
-    "@types/react": "^18.2.37",
-    "@typescript-eslint/eslint-plugin": "^6.11.0",
-    "@typescript-eslint/parser": "^6.11.0",
-    "eslint": "^8.53.0",
-    "eslint-config-prettier": "^9.0.0",
-    "eslint-plugin-prettier": "^5.0.1",
-    "eslint-plugin-react": "^7.33.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^3.1.0",
+  "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "tslib": "^2.6.2",
-    "typescript": "^5.2.2"
+    "react-intersection-observer-kit": "react-intersection-observer-kit",
+    "react-router-dom": "^6.19.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "postcss": "^8.4.31",
+    "prettier": "^3.1.0",
+    "prettier-plugin-tailwindcss": "^0.5.7",
+    "tailwindcss": "^3.3.5",
+    "vite": "^4.4.5"
   }
 }
