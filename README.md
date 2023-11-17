@@ -281,15 +281,15 @@ function ExampleComponent() {
 
 Explore these practical examples to see how React Intersection Observer Kit can help you in different scenarios. You can find example implementations in the `examples` folder of the package repository.
 
-### [Animate Elements](hello)
+### [Animate Elements](https://wardkhaddour.github.io/react-intersection-observer-kit/)
 
 Animate elements when they enter the viewport using React Intersection Observer Kit.
 
-### [Lazy Loading Component](hello)
+### [Lazy Loading Component](https://wardkhaddour.github.io/react-intersection-observer-kit/lazy-load)
 
 Implement lazy loading for React components to optimize performance.
 
-### [Lazy Fetching Data](hello)
+### [Lazy Fetching Data](https://wardkhaddour.github.io/react-intersection-observer-kit/lazy-fetch)
 
 Lazy fetching of data when a component becomes visible in the viewport.
 
