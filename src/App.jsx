@@ -1,17 +1,33 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
+import {
+  Route,
+  BrowserRouter,
+  Routes,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from 'react-router-dom';
 import LazyFetchingData from './LazyFetchingData';
 import LazyLoadComponent from './LazyLoadingComponent';
 import AnimateElements from './AnimateElements';
 
+const router = createBrowserRouter([
+  { path: '/react-intersection-observer-kit/', element: <AnimateElements /> },
+  {
+    path: '/react-intersection-observer-kit/lazy-fetch',
+    element: <LazyFetchingData />,
+  },
+  {
+    path: '/react-intersection-observer-kit/lazy-load',
+    element: <LazyLoadComponent />,
+  },
+]);
+
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AnimateElements />} path='/' index />
-        <Route element={<LazyFetchingData />} path='/lazy-fetch' />
-        <Route element={<LazyLoadComponent />} path='/lazy-load' />
-      </Routes>
-    </BrowserRouter>
+    <>
+      Hello
+      <RouterProvider router={router} />
+    </>
   );
 }
 
