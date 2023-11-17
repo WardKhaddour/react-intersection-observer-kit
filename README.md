@@ -222,7 +222,7 @@ import { useInViewport } from 'react-intersection-observer-kit';
 
 function ExampleComponent() {
   const [ref, inViewport] = useInViewport({
-    inViewCondition: (entry) => entry.intersectionRatio,
+    inViewCondition: (entry) => entry.isIntersecting,
     observerOptions: { root: null, rootMargin: '0px', threshold: 0.5 },
   });
 
