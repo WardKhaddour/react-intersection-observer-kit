@@ -10,7 +10,7 @@ function AnimateElements() {
           threshold: 0.8,
         }}
       >
-        <header className='w-full fixed top-0 left-0 bg-gray-800 '>
+        <header className='w-full fixed top-0 left-0 bg-gray-800 z-10'>
           <Nav />
         </header>
         <Main />

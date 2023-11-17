@@ -17,9 +17,9 @@ function Features({ isActive }) {
   return (
     <section
       ref={ref}
-      className={`min-h-[70vh]  ${
-        isActive ? 'bg-teal-700' : 'bg-gray-700'
-      } m-20 rounded-md flex items-start justify-center flex-col gap-5 transition-colors duration-300 px-8 shadow-lg`}
+      className={`min-h-[60vh]  ${
+        isActive ? 'bg-cyan-600' : 'bg-gray-700'
+      } m-20 rounded-md flex items-start justify-start pt-5 flex-col gap-5 transition-colors duration-300 px-8 shadow-lg`}
     >
       <div
         className={`px-6 absolute ${
@@ -27,7 +27,7 @@ function Features({ isActive }) {
         } transition-all duration-200`}
       >
         <h2 className='text-4xl font-bold'>Features</h2>
-        <ul>
+        <ul className='flex flex-col gap-4 text-lg mt-5'>
           {featuresList.map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}

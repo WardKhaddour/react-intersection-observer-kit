@@ -26,11 +26,6 @@ function Examples({ isActive }) {
               Lazy Load Component
             </Link>
           </li>
-          <li>
-            <Link to='lazy-import' className='text-teal-300 hover:text-teal-100 transition-colors duration-300'>
-              Lazy Import Component
-            </Link>
-          </li>
         </ul>
       </div>
     </section>

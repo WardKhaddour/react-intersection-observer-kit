@@ -30,7 +30,6 @@ function GetStarted({ isActive }) {
           }
   `}</code>
       </pre>
-
       <a
         className='py-6 hover:text-gray-900 font-bold relative after:w-0 after:absolute after:h-0.5 after:bottom-5 after:left-0 hover:after:w-full after:bg-gray-900 after:transition-all'
         href='https://www.npmjs.com/package/react-intersection-observer-kit'
