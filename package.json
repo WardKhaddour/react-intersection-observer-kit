@@ -2,7 +2,7 @@
   "name": "react-intersection-observer-kit",
   "description": "React library for using Intersection Observer API in React-friendly way",
   "author": "Ward Khaddour",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
