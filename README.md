@@ -285,11 +285,11 @@ Explore these practical examples to see how React Intersection Observer Kit can 
 
 Animate elements when they enter the viewport using React Intersection Observer Kit.
 
-### [Lazy Loading Component](https://wardkhaddour.github.io/react-intersection-observer-kit/lazy-load)
+### [Lazy Loading Component](https://wardkhaddour.github.io/react-intersection-observer-kit/#/lazy-load)
 
 Implement lazy loading for React components to optimize performance.
 
-### [Lazy Fetching Data](https://wardkhaddour.github.io/react-intersection-observer-kit/lazy-fetch)
+### [Lazy Fetching Data](https://wardkhaddour.github.io/react-intersection-observer-kit/#/lazy-fetch)
 
 Lazy fetching of data when a component becomes visible in the viewport.
 
