@@ -32,6 +32,10 @@
     - [4. `useInViewport` Hook](#4-useinviewport-hook)
       - [Parameters](#parameters-1)
       - [Returns](#returns-2)
+  - [📁 Examples](#📁-examples)
+    - [Animate Elements](#animate-elements)
+    - [Lazy Loading Component](#lazy-loading-component)
+    - [Lazy Fetching Data](#lazy-fetching-data)
   - [🤝 Contributing](#🤝-contributing)
     - [🚧 How to Contribute](#🚧-how-to-contribute)
       - [1. Fork the Repository](#1-fork-the-repository)
@@ -40,25 +44,25 @@
       - [4. Commit and push changes](#4-commit-and-push-changes)
       - [5. Open a Pull Request](#5-open-a-pull-request)
     - [👥 Ways to Contribute](#👥-ways-to-contribute)
-      - [Report Bugs:](#report-bugs)
+      - [Report Bugs](#report-bugs)
       - [Request Features](#request-features)
       - [Provide Feedback](#provide-feedback)
   - [📄 License](#-license)
 
 ## 🌟 Overview
 
-React library for using [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) in a React-friendly way. Contains hooks to determine if element entered the viewport or not, and to tell what elements are currently in the viewport.
+React library for using [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) in a React-friendly way. Contains hooks to determine if an element entered the viewport or not, and to tell what elements are currently in the viewport.
 
 ## 🎉 Features
 
 - 👀 Detect if an element has entered or left the viewport.
 - 🔭 Track which elements are currently in the viewport in real-time.
-- 🤙 Execute customizable callbacks when element enters or exits the viewport.
+- 🤙 Execute customizable callbacks when an element enters or exits the viewport.
 - ⚙️ Customize the Intersection Observer API options.
 - 🛃 Implement your custom conditions to determine element visibility.
 - ⚡️ Optimized performance with minimal re-renders, components render only when necessary.
 - 🛠️ Crafted with TypeScript, ensuring type safety.
-- 🤏 Small size, dose not need any extra dependencies.
+- 🤏 Small size, does not need any extra dependencies.
 
 ## 🚀 Installation
 
@@ -82,7 +86,7 @@ Getting started with React Intersection Observer Kit is a straightforward proces
 
 ### Import `ObserverProvider`
 
-In your React application, you'll need to wrap the components that will use the Intersection Observer API hooks with the ObserverProvider. This provider is responsible for observing elements, updating the active elements state, and execute the activity listeners.
+In your React application, you'll need to wrap the components that will use the Intersection Observer API hooks with the ObserverProvider. This provider is responsible for observing elements, updating the active elements' state, and executing the activity listeners.
 
 #### 1. Import and use `ObserverProvider`
 
@@ -104,7 +108,7 @@ export default App;
 
 #### 2. Customize the `ObserverProvider`
 
-You can customize the Intersection Observer API by using the optional options prop to override the default options, and the optional activeCondition callback to override the default condition for changing element's active state:
+You can customize the Intersection Observer API by using the optional options prop to override the default options, and the optional activeCondition callback to override the default condition for changing the element's active state:
 
 ```jsx
 import { ObserverProvider } from 'react-intersection-observer-kit';
@@ -144,7 +148,7 @@ function ExampleComponent() {
   const activeElements = useActiveElements();
 
   return (
-    {/*Add the useRegister returned ref as ref for element you want it to be observed*/}
+    {/*Add the useRegister returned ref as ref for the element you want it to be observed*/}
     <div ref={ref}>
         {/*Component Content*/}
     </div>);
@@ -155,7 +159,7 @@ export default ExampleComponent;
 
 #### 4. Add extra behavior with Callbacks
 
-You can add extra behavior for each elements when its active state changes by providing callbacks
+You can add extra behavior for each element when its active state changes by providing callbacks
 
 ```jsx
 import { useRegister, useActiveElements } from 'react-intersection-observer-kit';
@@ -164,7 +168,7 @@ function ExampleComponent() {
   // Register the element to be observed
   const ref = useRegister('elementId', {
     onEntryActive: (entry) => {
-      // Your custom logic when the element's state changes to active
+      // Your custom logic when the element's state changes to Active
     },
     onEntryInactive: (entry) => {
       // Your custom logic when the element's state changes to Inactive
@@ -179,27 +183,32 @@ export default ExampleComponent;
 
 #### 5. Using `useInViewport` for Independent Elements
 
-If you need to observe single element or a few elements which are independent from each other, you can use the `useInViewport` hook, which dose not need to be inside `ObserverProvider`.
+If you need to observe a single element or a few elements which are independent of each other, you can use the `useInViewport` hook, which does not need to be inside `ObserverProvider`.
+
+##### You can use this hook for lazy loading images for example!
+
+```jsx
+import { useInViewport } from 'react-intersection-observer-kit';
+
+function LazyImage({ src, alt }) {
+  const [ref, inViewport] = useInViewport();
+
+  return <img ref={ref} src={inViewport ? src : ''} alt={alt} style={{ opacity: inViewport ? 1 : 0 }} />;
+}
+
+export default LazyImage;
+```
 
 ```jsx
 // App.jsx
-import { ExampleComponent } from './ExampleComponent';
+import { LazyImage } from './LazyImage';
 
 function App() {
   return (
     <div>
-      <ExampleComponent />
+      <LazyImage src='https://example.com/image-name.jpg' alt='Lazy Image' />
     </div>
   );
-}
-
-// ExampleComponent.jsx
-import { useInViewport } from 'react-intersection-observer-kit';
-
-function ExampleComponent() {
-  const [ref, inViewport] = useInViewport();
-
-  return <div ref={ref}>{/* Component Content */}</div>;
 }
 ```
 
@@ -267,6 +276,22 @@ function ExampleComponent() {
 #### Returns
 
 `[RefObject<T>, boolean]`: Tuple containing the element ref and a boolean indicating if the element is in the viewport. Use the returned ref to start observing an element.
+
+## 📁 Examples
+
+Explore these practical examples to see how React Intersection Observer Kit can help you in different scenarios. You can find example implementations in the `examples` folder of the package repository.
+
+### [Animate Elements](hello)
+
+Animate elements when they enter the viewport using React Intersection Observer Kit.
+
+### [Lazy Loading Component](hello)
+
+Implement lazy loading for React components to optimize performance.
+
+### [Lazy Fetching Data](hello)
+
+Lazy fetching of data when a component becomes visible in the viewport.
 
 ## 🤝 Contributing
 
