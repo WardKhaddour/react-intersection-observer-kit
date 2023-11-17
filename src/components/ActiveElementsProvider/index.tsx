@@ -16,8 +16,6 @@ type Props = {
  * @param {RefObject<HTMLElement>[]} [props.elements] Elements that will be observed.
  * @param {IntersectionObserverInit} [props.options] Intersection Observer options.
  * @param {(entry: IntersectionObserverEntry) => boolean} [props.activeCondition] Callback to determine whether to update the active elements array or not.
- * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryActive] optional callback, will be invoked when activeCondition became true.
- * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInactive] optional callback, will be invoked when activeCondition became false.
  * @returns {ReactNode} the Active Elements Context Provider
  */
 

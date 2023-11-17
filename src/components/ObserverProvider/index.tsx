@@ -57,8 +57,6 @@ type Props = {
  * @param {ReactNode[] | ReactNode} [props.children] - Components which needs access to the useRegister and useActiveElements Hooks.
  * @param {IntersectionObserverInit} [props.options] - Options for overriding the default options for Intersection Observer.
  * @param {(entry: IntersectionObserverEntry) => boolean} [props.activeCondition] - Callback to determine whether to update the active elements array or not.
- * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryActive] - An optional callback, will be invoked when activeCondition became true..
- * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInactive] - An optional callback, will be invoked when activeCondition became false..
  * @returns {ReactNode}.
  */
 function ObserverProvider({ children, options, activeCondition = defaultActiveCondition }: Props): ReactNode {

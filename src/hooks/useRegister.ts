@@ -7,6 +7,8 @@ import { activityListenerType } from '../types/activityListenerType';
  * React Hook for registering and un-registering a DOM element to track it with ObserverProvider.
  * @template T - The type of the HTML element to be registered.
  * @param {string} [id] - Optional ID to assign to the registered element, Must be specified if the element do not have an ID in order to work properly.
+ * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryActive] optional callback, will be invoked when activeCondition became true.
+ * @param {(entry: IntersectionObserverEntry) => void} [props.onEntryInactive] optional callback, will be invoked when activeCondition became false.
  * @returns {React.RefObject<T>} A ref object representing the registered HTML element.
  */
 function useRegister<T extends HTMLElement>(
