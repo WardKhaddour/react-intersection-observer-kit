@@ -2,7 +2,7 @@
   "name": "react-intersection-observer-kit",
   "description": "React library for using Intersection Observer API in React-friendly way",
   "author": "Ward Khaddour",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "repository": {
     "type": "git",
     "url": "https://github.com/WardKhaddour/react-intersection-observer-kit"
