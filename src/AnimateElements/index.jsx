@@ -10,13 +10,15 @@ function AnimateElements() {
           threshold: 0.8,
         }}
       >
-        <header className='w-full fixed top-0 left-0 bg-gray-800 z-10'>
+        <header className="w-full fixed top-0 left-0 bg-gray-800 z-10">
           <Nav />
         </header>
         <Main />
       </ObserverProvider>
-      <footer className='block w-full h-fit p-5 text-center bg-gray-950 text-white rounded-t-md '>
-        <p>&copy; 2023 React Intersection Observer Kit | Created by Ward Khaddour</p>
+      <footer className="block w-full h-fit p-5 text-center bg-gray-950 text-white rounded-t-md ">
+        <p>
+          &copy; 2023 React Intersection Observer Kit | Created by Ward Khaddour
+        </p>
       </footer>
     </>
   );

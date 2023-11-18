@@ -18,16 +18,16 @@ function Features({ isActive }) {
     <section
       ref={ref}
       className={`min-h-[60vh]  ${
-        isActive ? 'bg-cyan-600' : 'bg-gray-700'
-      } m-20 rounded-md flex items-start justify-start pt-5 flex-col gap-5 transition-colors duration-300 px-8 shadow-lg`}
+        isActive ? 'bg-[#435334]' : 'bg-gray-700'
+      } m-20 rounded-md flex items-start justify-start pt-5 flex-col gap-5 transition-colors duration-300 px-8 shadow-lg text-[#CEDEBD]`}
     >
       <div
         className={`px-6 absolute ${
           isActive ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-full'
         } transition-all duration-200`}
       >
-        <h2 className='text-4xl font-bold'>Features</h2>
-        <ul className='flex flex-col gap-4 text-lg mt-5'>
+        <h2 className="text-4xl font-bold">Features</h2>
+        <ul className="flex flex-col -ml-6 gap-4 text-lg mt-5">
           {featuresList.map((feature, index) => (
             <li key={index}>{feature}</li>
           ))}
